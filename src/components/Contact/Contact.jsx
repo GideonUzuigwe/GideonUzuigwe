@@ -44,7 +44,7 @@ const Contact = () => {
           </div>
           <div className="socials">
             <div>
-              <a href="">
+              <a href="https://www.linkedin.com/in/gideon-uzuigwe-2a740b259/">
                 <FaLinkedinIn />
               </a>
             </div>
