@@ -26,7 +26,7 @@ const Portfolio = () => {
               className="portfolio"
               onClick={() => openPortfolio(item)}
             >
-              <img src={item.preview_image} />
+              <img src={item.preview_image} alt="image" />
               <div className="port_splitte">
                 <p>{item.type}</p>
               </div>

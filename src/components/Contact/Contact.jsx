@@ -49,7 +49,7 @@ const Contact = () => {
               </a>
             </div>
             <div>
-              <a href="">
+              <a href="https://www.facebook.com/UptodateAcademy212?mibextid=ZbWKwL">
                 <FaFacebookF />
               </a>
             </div>

@@ -31,8 +31,7 @@ const Hero = () => {
             I'm a Nigerian based web designer. I am based on both front‑end and
             back‑end designs. I am focused on crafting clean & user‑friendly
             experiences, I am passionate about building excellent software that
-            improves the lives of those around me. Click on the <b>button</b> to
-            know more about me.
+            improves the lives of those around me.
           </p>
           <Link to="/about">
             <span>More About me</span>
