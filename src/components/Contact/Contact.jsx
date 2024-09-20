@@ -54,7 +54,7 @@ const Contact = () => {
               </a>
             </div>
             <div>
-              <a href="">
+              <a href="https://x.com/fod_code">
                 <FaTwitter />
               </a>
             </div>
