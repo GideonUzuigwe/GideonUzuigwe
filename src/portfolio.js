@@ -20,10 +20,10 @@ const portfolioData = [
     {
         "id": 3,
         "project": "Website",
-        "languages": "HTML, CSS, JavaScript, Node Express Js",
+        "languages": "HTML, CSS, TailwindCSS, JavaScript, Node, Express Js",
         "client": "None",
         "preview": "https://bit.ly/47wZdhu",
-        "preview_image": "https://github.com/GideonUzuigwe/GideonUzuigwe/blob/main/src/assets/portfolio-2.jpg?raw=true",
+        "preview_image": "https://github.com/GideonUzuigwe/GideonUzuigwe/blob/main/src/assets/portfolio-3.jpg?raw=true",
         "type": "Blog project"
     },
 ]

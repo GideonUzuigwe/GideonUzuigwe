@@ -79,7 +79,8 @@
 }
 
 .about-shapes div {
-  max-width: 100%;
+  max-width: 300px;
+  width: 100%;
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 10px;
   padding: 25px 30px;
