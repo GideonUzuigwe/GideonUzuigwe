@@ -1,19 +1,47 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "./Contact.css";
 import { IoMdMailUnread } from "react-icons/io";
 import { FaSquarePhone } from "react-icons/fa6";
 import { FaLinkedinIn } from "react-icons/fa";
-import { FaFacebookF } from "react-icons/fa";
-import { FaTwitter } from "react-icons/fa";
 import { BsFillSendFill } from "react-icons/bs";
 import { FaGithub } from "react-icons/fa";
 import { useTheme } from "../ThemeProvider/ThemeProvider";
+import axios from "axios";
+import Popup from "../../components/Popup Lib/PopupLib";
 
 const Contact = () => {
   const { theme } = useTheme();
   useEffect(() => {
     document.title = "Gideon - Get In Touch With Me";
   }, []);
+
+  const [email, setEmail] = useState("");
+  const [subject, setSubject] = useState("");
+  const [message, setMessage] = useState("");
+  const submitBtn = useRef(null);
+
+  // https://email-api-bqjz.onrender.com
+
+  async function submitFormDetails(e) {
+    let prevText = submitBtn.current.innerHTML;
+    submitBtn.current.innerHTML = "Sending...";
+    e.preventDefault();
+    try {
+      const res = await axios.post("http://localhost:3000/send-mail", {
+        email,
+        subject,
+        message,
+      });
+      console.log(res.data);
+      submitBtn.current.innerHTML = prevText;
+    } catch (err) {
+      submitBtn.current.innerHTML = "Not Sent...";
+      setTimeout(() => {
+        submitBtn.current.innerHTML = prevText;
+      }, 3000);
+    }
+  }
+
   return (
     <div className="container">
       <div className="contact_info">
@@ -49,16 +77,6 @@ const Contact = () => {
               </a>
             </div>
             <div>
-              <a href="https://www.facebook.com/UptodateAcademy212?mibextid=ZbWKwL">
-                <FaFacebookF />
-              </a>
-            </div>
-            <div>
-              <a href="https://x.com/fod_code">
-                <FaTwitter />
-              </a>
-            </div>
-            <div>
               <a href="https://github.com/GideonUzuigwe">
                 <FaGithub />
               </a>
@@ -66,15 +84,35 @@ const Contact = () => {
           </div>
         </div>
         <div className={`contact_form ${theme}`}>
-          <form>
+          <form onSubmit={submitFormDetails}>
             <div>
-              <input type="text" name="name" placeholder="YOUR NAME" />
-              <input type="email" name="email" placeholder="YOUR EMAIL" />
-              <input type="text" name="subject" placeholder="YOUR SUBJECT" />
+              <input
+                type="email"
+                name="email"
+                placeholder="YOUR EMAIL"
+                onChange={(e) => setEmail(e.target.value)}
+                value={email}
+                required
+              />
+              <input
+                type="text"
+                name="subject"
+                placeholder="YOUR SUBJECT"
+                onChange={(e) => setSubject(e.target.value)}
+                value={subject}
+                required
+              />
             </div>
 
-            <textarea rows={8} placeholder="YOUR MESSAGE"></textarea>
-            <button className={`btn ${theme} lg`}>
+            <textarea
+              rows={8}
+              name="message"
+              placeholder="YOUR MESSAGE"
+              onChange={(e) => setMessage(e.target.value)}
+              value={message}
+              required
+            ></textarea>
+            <button className={`btn ${theme} lg`} ref={submitBtn}>
               <span>Submit</span>
               <span></span>
               <span className="btn_icon">

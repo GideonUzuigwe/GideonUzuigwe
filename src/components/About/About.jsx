@@ -9,6 +9,18 @@ import user from "../../assets/user.jpg";
 
 const About = () => {
   const { theme } = useTheme();
+
+  function downloadResume(e) {
+    const url = "../../resume.pdf";
+    const a = document.createElement("a");
+    a.href = url;
+    a.target = "_blank";
+    a.download = "Resume.pdf";
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+  }
+
   return (
     <div className="container">
       <Title title1="about " title2="me" subTitle="resume" />
@@ -65,7 +77,7 @@ const About = () => {
               </p>
             </div>
           </div>
-          <button className={`btn ${theme}`}>
+          <button className={`btn ${theme}`} onClick={downloadResume}>
             <span>Download Cv</span>
             <span></span>
             <span className="btn_icon">
