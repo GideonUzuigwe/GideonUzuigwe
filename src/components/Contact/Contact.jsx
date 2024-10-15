@@ -7,7 +7,6 @@ import { BsFillSendFill } from "react-icons/bs";
 import { FaGithub } from "react-icons/fa";
 import { useTheme } from "../ThemeProvider/ThemeProvider";
 import axios from "axios";
-import Popup from "../../components/Popup Lib/PopupLib";
 
 const Contact = () => {
   const { theme } = useTheme();
@@ -20,18 +19,19 @@ const Contact = () => {
   const [message, setMessage] = useState("");
   const submitBtn = useRef(null);
 
-  // https://email-api-bqjz.onrender.com
-
   async function submitFormDetails(e) {
     let prevText = submitBtn.current.innerHTML;
     submitBtn.current.innerHTML = "Sending...";
     e.preventDefault();
     try {
-      const res = await axios.post("http://localhost:3000/send-mail", {
-        email,
-        subject,
-        message,
-      });
+      const res = await axios.post(
+        "https://krwlyok762fgnx47pv3yx4qldm0habbp.lambda-url.eu-north-1.on.aws/send-mail",
+        {
+          email,
+          subject,
+          message,
+        }
+      );
       console.log(res.data);
       submitBtn.current.innerHTML = prevText;
     } catch (err) {
