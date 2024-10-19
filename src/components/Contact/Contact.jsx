@@ -14,26 +14,35 @@ const Contact = () => {
     document.title = "Gideon - Get In Touch With Me";
   }, []);
 
-  const [email, setEmail] = useState("");
-  const [subject, setSubject] = useState("");
+  const [senderEmail, setSenderEmail] = useState("");
+  const [receiverEmail, setReceiverEmail] = useState("");
+  const [name, setName] = useState("");
   const [message, setMessage] = useState("");
   const submitBtn = useRef(null);
 
   async function submitFormDetails(e) {
     let prevText = submitBtn.current.innerHTML;
-    submitBtn.current.innerHTML = "Sending...";
+    submitBtn.current.innerHTML = "<span>Sending...</span>";
     e.preventDefault();
     try {
       const res = await axios.post(
-        "https://krwlyok762fgnx47pv3yx4qldm0habbp.lambda-url.eu-north-1.on.aws/send-mail",
+        "https://uwz65y3c4ckkial3oqeuhqc6re0bugtf.lambda-url.eu-north-1.on.aws/send-mail",
         {
-          email,
-          subject,
-          message,
+          name: name,
+          senderEmail: senderEmail,
+          receiverEmail: receiverEmail,
+          text: message,
         }
       );
-      console.log(res.data);
-      submitBtn.current.innerHTML = prevText;
+      submitBtn.current.innerHTML = "SENT";
+      setSenderEmail("");
+      setReceiverEmail("");
+      setName("");
+      setMessage("");
+      alert("Your message was successfully sent 😎");
+      setTimeout(() => {
+        submitBtn.current.innerHTML = prevText;
+      }, 3000);
     } catch (err) {
       submitBtn.current.innerHTML = "Not Sent...";
       setTimeout(() => {
@@ -87,19 +96,27 @@ const Contact = () => {
           <form onSubmit={submitFormDetails}>
             <div>
               <input
-                type="email"
-                name="email"
-                placeholder="YOUR EMAIL"
-                onChange={(e) => setEmail(e.target.value)}
-                value={email}
+                type="name"
+                name="name"
+                placeholder="YOUR NAME"
+                onChange={(e) => setName(e.target.value)}
+                value={name}
                 required
               />
               <input
-                type="text"
-                name="subject"
-                placeholder="YOUR SUBJECT"
-                onChange={(e) => setSubject(e.target.value)}
-                value={subject}
+                type="email"
+                name="SenderEmail"
+                placeholder="SENDER EMAIL"
+                onChange={(e) => setSenderEmail(e.target.value)}
+                value={senderEmail}
+                required
+              />
+              <input
+                type="email"
+                name="Receiver Email"
+                placeholder="RECEIVER EMAIL"
+                onChange={(e) => setReceiverEmail(e.target.value)}
+                value={receiverEmail}
                 required
               />
             </div>
